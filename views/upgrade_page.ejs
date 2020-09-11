@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>New URL - TinyApp Example</title>
+  </head>
+
+  <body>
+    <%- include('partials/_header2') %>
+
+    <main style="margin: 1em;">
+      <% if(message) {%>
+        <div class="alert alert-info text-center" role="alert">
+          <h3><%= message %></h3>
+          Lorem ipsum dolor sit amet, eu vidit propriae cum. Laudem omittam complectitur cu mei. Hinc sententiae id sit, cum in illum tractatos. Nec ea affert dolores forensibus. Habemus tibique ea mea. Sit et solum verear equidem, eu dolor prompta assentior vis, usu an exerci utinam.
+        </div>
+      <%}%>
+      <h1 class="text-center">UPGRADE YOUR LINKS</h1>
+      <p>TinyURL custom plan help you optimize and track every touchpoint with your audience, no matter your size or reach. Choose the plan that best fits your needs.</p>
+      
+      <div class="card mt-3">
+        <div class="card-header text-center">
+          Free
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">0$/mo</h5>
+          <p class="card-text">Perfect for personal users ready to start tracking and measuring audience interactions.</p>
+          <ul>
+            <li>1 User Seat</li>
+          </ul>
+          <h4>YOUR CURRENT PLAN</h4>
+        </div>
+      </div>
+
+      <div class="card mt-3">
+        <div class="card-header text-center">
+          BASIC
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">$29/mo</h5>
+          <p class="card-text">Create and share links to increase engagement and build trust with every click.</p>
+          <ul>
+            <li>1,500 Branded Links</li>
+            <li>1 User Seat</li>
+            <li>1 Free Custom Domain</li>
+          </ul>
+          <a href="#" class="btn btn-primary">UPGRADE TO BASIC</a>
+        </div>
+      </div>
+    </main>
+      <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>

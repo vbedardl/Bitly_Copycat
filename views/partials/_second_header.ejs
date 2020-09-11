@@ -1,0 +1,62 @@
+<header>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- Split button -->
+  <style>
+    #profileImage {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #512DA8;
+      font-size: 25px;
+      color: #fff;
+      text-align: center;
+      line-height: 30px;
+      margin: 20px 0;
+    }
+  </style>
+  <nav class="navbar navbar-expand-md navbar-dark bg-success row justify-content-between">
+    <div>
+    <a class="navbar-brand" href="/urls">TinyApp</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <% if(user) { %>
+          <a class="nav-item nav-link" href="/urls"> All Links</a>
+          <a class="nav-item nav-link" href="/urls">Dashboard</a>
+          <a class="nav-item nav-link" href="/urls">Campaigns</a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+      <% if(user) {%>
+        <div>
+        <div class="btn-group">
+          <button id="profileImage" type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= user.email[0] %>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="#">Profile settings</a></li>
+            <li><a href="#">Account settings</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Log out</a></li>
+          </ul>
+        </div>
+      </div>
+<!--         <form method="POST" action="/logout">
+          <button type="submit" class="btn btn-primary">Logout</button>
+        </form> -->
+      <% }else {%>
+        <a class="text-white mr-3" href="/register">Register</a>
+        <a class="text-white mr-3" href="/login">Login</a>
+      <% } %>
+  </nav>
+</header>
+

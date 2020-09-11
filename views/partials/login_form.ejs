@@ -1,0 +1,40 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+<link rel="stylesheet" href="../styles.css">
+
+<div class="container mt-2">
+
+<div class="card bg-light">
+<article class="card-body mx-auto" style="max-width: 600px;">
+	<h4 class="card-title mt-3 text-center">Log in</h4>
+	<p class="text-center">Don't have an account? Create one for free</p>
+	<p>
+    <a href="/google" class="btn btn-primary btn-block"> Log in with Google</a>
+	</p>
+	<p class="divider-text text-center">
+        <span class="bg-light text-center">OR</span>
+  </p>
+  <form method="POST" action="/login">
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+		 </div>
+     <input name='email' class="form-control" placeholder="Enter email" type="email" id='email'>
+    </div> <!-- form-group// -->
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+		</div>
+    <input class="form-control" type="password" id='password' name='password' placeholder="Create Password">
+  </div> <!-- form-group// -->                     
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-block"> Log in</button>
+    </div> <!-- form-group// -->   
+    <p class="text-center"><a href="/forgot-password">Forgot?</a> </p>                                                                 
+</form>
+</article>
+</div> <!-- card.// -->
+</div> 

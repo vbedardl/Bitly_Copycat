@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <title>URL - TinyApp Example</title>
+</head>
+
+<body>
+  <%- include('partials/_header2') %>
+  <% if(user){ %>
+    <% if(userUrls[shortURL]) {%>
+  <div class="card">
+      <div class="card-body" style="display:flex;justify-content: space-between;">
+        <div>
+        <h6><span class="text-muted">Created at: <%= userUrls[shortURL].createdAt.toDateString() %> </span>| <span class="text-primary"><%= user.email %></span></h6>
+        <h2 class="card-title"><%= url.urlTitle %></h2>
+        <h5 class="card-title text-muted"><%= longURL %></h5>
+        <div class="row ml-1">
+        <h4 class="card-text"><a id="shortU" href="/u/<%= userUrls[shortURL].u %>"><%= userUrls[shortURL].u %></a></h4>
+        <button id='copyClip' class="btn btn-outline-primary ml-3" onclick="copyToClipboard('<%= fullPath %>/u/<%= userUrls[shortURL].u %>')">copy</button>
+          <form class="ml-3" method="GET" action="/urls/edit/<%= shortURL %>">
+            <button type="submit" class="btn btn-outline-primary">
+              Edit
+            </button>
+          </form>
+        </div> 
+        </div>
+        <div>
+          <% if(userUrls[shortURL].metaData) {%>
+            <img width="30px"  style="border-radius:5px;" src="<%= userUrls[shortURL].metaData.site.favicon %>">
+            <%}%>
+      </div>
+  </div>
+  <div class="card">
+      <div class="card-body">
+        <div class="row ml-2">
+          <div class="col-4">
+            <h2><%= userUrls[shortURL].visits.mobile + userUrls[shortURL].visits.desktop %> </h2>
+            <h6>Total clicks</h6>
+          </div>
+          <div class="col-4 offset-4">
+            <h2><%= Object.keys(userUrls[shortURL].uniqueVisitors).length %></h2>
+            <h6>Unique Visitors</h6>
+          </div>
+        </div>
+      </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h2>Referrers</h2>
+      <canvas id="devices" width="600" height="400"></canvas>
+      <table class="table mt-3">
+        <tbody>
+          <% for(let referal in url.referal) {%>
+          <tr>
+            <td><%= referal %></td>
+            <td><%= url.referal[referal]%></td>
+            <td><%= url.referal[referal] / Object.keys(url.referal).map(elm => url.referal[elm]).reduce((a,b) => a+b) * 100 %>%</td>
+          </tr>
+          <%}%>
+        </tbody>
+      </table>
+    </div>
+  </div>  
+    <% } else { %>
+      <div class="card text-center">
+        <div class="card-header"></div>
+        <div class="card-body">
+          <div class="alert alert-warning" role="alert">
+            This urls does not belong to you account...sorry! Go back to your <a href="/urls">urls</a>
+          </div>
+        </div>
+      <div class="card-footer text-muted"></div>
+    </div>
+    <% } %>
+  <% }else{ %>
+    <div class="card text-center">
+      <div class="card-header"></div>
+      <div class="card-body">
+        <div class="alert alert-warning" role="alert">
+          Please <a href="/login">login</a> or <a href="/register" >register</a> to access the urls!
+        </div>
+      </div>
+    <div class="card-footer text-muted"></div>
+    </div>
+  <% } %>
+  <div id="mobile" data-count='<%= mobileCount %>'></div>
+  <div id="desktop" data-count='<%= desktopCount %>'></div>
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+  <script>
+
+const copyToClipboard = str => {
+  const el = document.createElement('textarea');
+  el.value = str;
+  el.setAttribute('readonly', '');
+  el.style.position = 'absolute';
+  el.style.left = '-9999px';
+  document.body.appendChild(el);
+  el.select();
+  document.execCommand('copy');
+  document.body.removeChild(el);
+};
+
+  </script>
+    <script>
+      var mc = document.getElementById('mobile').dataset.count;
+      var dc = document.getElementById('desktop').dataset.count;
+      console.log('mobile:', mc, 'desktop:', dc)
+  
+      var devicesCanvas = document.getElementById("devices");
+  
+      Chart.defaults.global.defaultFontFamily = "Lato";
+      Chart.defaults.global.defaultFontSize = 18;
+  
+      var devicesData = {
+          labels: ["Mobile", "Desktop"],
+          datasets: [
+              {
+                  data: [mc, dc],
+                  backgroundColor: ["#FF6384", "#63FF84", "#84FF63"]
+              }]
+      };
+  
+      var pieChart = new Chart(devicesCanvas, {
+        type: 'doughnut',
+        data: devicesData
+      });
+    </script>
+</body>
+</html>
